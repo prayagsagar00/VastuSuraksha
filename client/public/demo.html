@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VastuSuraksha Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary-dark: #2A4E6E;
+            --primary-light: #3A7B7F;
+            --accent: #FF6B35;
+            --warning: #FFC107;
+            --danger: #DC3545;
+            --success: #28A745;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--primary-light);
+        }
+        
+        .card-header {
+            background-color: var(--primary-dark);
+            color: white;
+        }
+        
+        .alert-critical {
+            border-left: 4px solid var(--danger);
+        }
+        
+        .alert-warning {
+            border-left: 4px solid var(--warning);
+        }
+        
+        .metric-card {
+            transition: transform 0.3s;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        #infrastructureMap {
+            height: 400px;
+            background: #e9ecef;
+            border-radius: 8px;
+        }
+        
+        .maintenance-card {
+            border-left: 4px solid var(--primary-light);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--primary-dark);">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-shield-alt me-2"></i>VastuSuraksha
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt me-1"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#maintenance"><i class="fas fa-tools me-1"></i> Maintenance</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <!-- Data Input Section -->
+        <div class="card mb-4 shadow">
+            <div class="card-header">
+                <h4><i class="fas fa-drafting-compass me-2"></i>Structural Data Input</h4>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-pills mb-4" id="inputTabs">
+                    <li class="nav-item">
+                        <button class="nav-link active" id="manual-tab" data-bs-toggle="pill" data-bs-target="#manual">Manual Input</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="sensor-tab" data-bs-toggle="pill" data-bs-target="#sensor">Sensor Data</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content">
+                    <!-- Manual Input -->
+                    <div class="tab-pane fade show active" id="manual">
+                        <form id="dataForm">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Stress Level (MPa)</label>
+                                    <input type="number" class="form-control" id="stressInput" step="0.01" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Water Level (m)</label>
+                                    <input type="number" class="form-control" id="waterInput" step="0.1" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Traffic Density (veh/hr)</label>
+                                    <input type="number" class="form-control" id="trafficInput" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Submit Data</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Sensor Data -->
+                    <div class="tab-pane fade" id="sensor">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i> Connected to 3 live sensors
+                        </div>
+                        <div class="row" id="sensorData">
+                            <!-- Will be populated by JS -->
+                        </div>
+                        <button class="btn btn-success w-100 mt-3" id="fetchSensorData">
+                            <i class="fas fa-sync me-2"></i> Fetch Live Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card metric-card text-white mb-3" style="background-color: var(--primary-dark);">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Structural Integrity</h6>
+                        <h2 class="card-title" id="integrityScore">92%</h2>
+                        <span class="badge bg-success">+2.3%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card metric-card mb-3">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Risk Level</h6>
+                        <h2 class="card-title text-warning" id="riskLevel">Medium</h2>
+                        <span class="text-muted">Last 24h</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card metric-card mb-3">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Active Alerts</h6>
+                        <h2 class="card-title text-danger" id="activeAlerts">3</h2>
+                        <span class="text-danger">1 Critical</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card metric-card mb-3">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Maintenance Due</h6>
+                        <h2 class="card-title text-primary" id="maintenanceDue">5</h2>
+                        <span class="text-primary">This week</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visualization Section -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-chart-line me-2"></i>Structural Health Trends</h5>
+                        <canvas id="healthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-exclamation-triangle me-2"></i>Recent Alerts</h5>
+                        <div class="list-group" id="alertList">
+                            <a href="#" class="list-group-item list-group-item-action alert-critical">
+                                <div class="d-flex justify-content-between">
+                                    <strong>Excessive stress on Bridge A-12</strong>
+                                    <small>10:45 AM</small>
+                                </div>
+                                <small>Stress level exceeded by 23%</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action alert-warning">
+                                <div class="d-flex justify-content-between">
+                                    <strong>High water at Reservoir R-5</strong>
+                                    <small>9:30 AM</small>
+                                </div>
+                                <small>Water level at 4.2m (threshold 4.0m)</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Infrastructure Map -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-map-marked-alt me-2"></i>Asset Locations</h5>
+                <div id="infrastructureMap">
+                    <!-- Map placeholder - would integrate with Leaflet/Google Maps in production -->
+                    <img src="https://maps.googleapis.com/maps/api/staticmap?center=25.2677,82.9913&zoom=13&size=800x400&maptype=roadmap&markers=color:red%7C25.2677,82.9913&key=YOUR_API_KEY" 
+                         alt="Map" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+
+        <!-- Maintenance Insights Section -->
+        <div class="card shadow mb-4" id="maintenance">
+            <div class="card-header">
+                <h4><i class="fas fa-tools me-2"></i>Maintenance Insights</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card maintenance-card mb-3">
+                            <div class="card-body">
+                                <h5><i class="fas fa-exclamation-circle text-danger me-2"></i>Urgent Actions</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Bearing replacement - Bridge B-203</li>
+                                    <li class="list-group-item">Crack sealing - Dam D-12</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card maintenance-card mb-3">
+                            <div class="card-body">
+                                <h5><i class="fas fa-chart-bar text-primary me-2"></i>Historical Trends</h5>
+                                <canvas id="maintenanceChart" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-responsive mt-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Structure</th>
+                                <th>Issue</th>
+                                <th>Priority</th>
+                                <th>Estimated Cost</th>
+                                <th>Last Inspected</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Bridge B-203</td>
+                                <td>Bearing wear</td>
+                                <td><span class="badge bg-danger">High</span></td>
+                                <td>₹1,20,000</td>
+                                <td>15 days ago</td>
+                            </tr>
+                            <tr>
+                                <td>Dam D-12</td>
+                                <td>Surface cracks</td>
+                                <td><span class="badge bg-warning">Medium</span></td>
+                                <td>₹75,000</td>
+                                <td>1 month ago</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report Generation Section -->
+        <div class="card shadow">
+            <div class="card-header">
+                <h4><i class="fas fa-file-pdf me-2"></i>Report Generation</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Report Type</label>
+                            <select class="form-select" id="reportType">
+                                <option value="full">Full Structural Report</option>
+                                <option value="summary">Executive Summary</option>
+                                <option value="maintenance">Maintenance Plan</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Time Period</label>
+                            <select class="form-select" id="reportPeriod">
+                                <option value="7days">Last 7 Days</option>
+                                <option value="30days">Last 30 Days</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Reports include all structural data, analysis, and recommendations
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="generatePdf">
+                    <i class="fas fa-download me-2"></i>Generate PDF Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Charts
+        const healthCtx = document.getElementById('healthChart').getContext('2d');
+        const healthChart = new Chart(healthCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Structural Integrity Index',
+                    data: [85, 88, 82, 90, 92, 89],
+                    borderColor: '#2A4E6E',
+                    backgroundColor: 'rgba(42, 78, 110, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 70,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        const maintenanceCtx = document.getElementById('maintenanceChart').getContext('2d');
+        const maintenanceChart = new Chart(maintenanceCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: 'Maintenance Issues',
+                    data: [12, 15, 18, 22, 25],
+                    backgroundColor: 'rgba(58, 123, 127, 0.7)'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Form Submission
+        document.getElementById('dataForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get input values
+            const stress = parseFloat(document.getElementById('stressInput').value);
+            const water = parseFloat(document.getElementById('waterInput').value);
+            const traffic = parseInt(document.getElementById('trafficInput').value);
+            
+            // Calculate integrity score (example calculation)
+            const integrityScore = 100 - (stress * 0.5) - (water * 5) - (traffic * 0.01);
+            document.getElementById('integrityScore').textContent = Math.max(50, integrityScore).toFixed(0) + '%';
+            
+            // Update risk level
+            const riskLevel = integrityScore > 85 ? 'Low' : integrityScore > 70 ? 'Medium' : 'High';
+            document.getElementById('riskLevel').textContent = riskLevel;
+            document.getElementById('riskLevel').className = 
+                `card-title text-${riskLevel === 'Low' ? 'success' : riskLevel === 'Medium' ? 'warning' : 'danger'}`;
+            
+            // Add to chart
+            const months = healthChart.data.labels;
+            healthChart.data.labels.push(months[months.length-1] + '+');
+            healthChart.data.datasets[0].data.push(integrityScore);
+            healthChart.update();
+            
+            alert('Data submitted successfully!');
+        });
+
+        // Sensor Data Simulation
+        document.getElementById('fetchSensorData').addEventListener('click', function() {
+            const sensorDataContainer = document.getElementById('sensorData');
+            sensorDataContainer.innerHTML = `
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h6>Stress Sensor</h6>
+                            <h3>${(Math.random() * 20 + 10).toFixed(2)} MPa</h3>
+                            <small class="text-muted">Updated: Just now</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h6>Water Sensor</h6>
+                            <h3>${(Math.random() * 2 + 0.5).toFixed(2)} m</h3>
+                            <small class="text-muted">Updated: Just now</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h6>Traffic Sensor</h6>
+                            <h3>${Math.floor(Math.random() * 800 + 200)} veh/hr</h3>
+                            <small class="text-muted">Updated: Just now</small>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        // PDF Generation
+        document.getElementById('generatePdf').addEventListener('click', function() {
+            // In a real implementation, you would use jsPDF and html2canvas
+            // This is a simplified simulation
+            
+            const reportType = document.getElementById('reportType').value;
+            const reportPeriod = document.getElementById('reportPeriod').value;
+            
+            // Simulate PDF generation
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.text(`VastuSuraksha Structural Report`, 10, 10);
+            doc.text(`Report Type: ${reportType}`, 10, 20);
+            doc.text(`Period: ${reportPeriod}`, 10, 30);
+            doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 10, 40);
+            doc.text(`Structural Integrity: ${document.getElementById('integrityScore').textContent}`, 10, 50);
+            doc.text(`Risk Level: ${document.getElementById('riskLevel').textContent}`, 10, 60);
+            
+            // In a real implementation, you would add more content and charts
+            // For demo purposes, we'll just show a simple PDF
+            doc.save(`VastuSuraksha_Report_${new Date().getTime()}.pdf`);
+            
+            // Show confirmation
+            alert('PDF report generated successfully!');
+        });
+
+        // Simulate real-time updates
+        setInterval(() => {
+            const alerts = Math.floor(Math.random() * 5);
+            document.getElementById('activeAlerts').textContent = alerts;
+        }, 10000);
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

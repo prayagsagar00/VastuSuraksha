@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure Analytics | VastuSuraksha</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        :root {
+            --primary-color: #2A4E6E;
+            --secondary-color: #3A7B7F;
+            --accent-color: #FF6B35;
+        }
+        
+        .analytics-card {
+            border-left: 4px solid var(--secondary-color);
+            transition: transform 0.3s;
+        }
+        
+        .analytics-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .trend-indicator {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .up-trend {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+        
+        .down-trend {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+  <div class="top-strip">
+    🚧 Welcome to VastuSuraksha – Safeguarding Infrastructure, Intelligently. 
+    <a href="/contact">Contact Us</a>
+  </div>
+
+  <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark ">
+<div class="container-fluid">
+  <!-- Logo & Tagline -->
+  <a class="navbar-brand d-flex align-items-center" href="#">
+    <!-- Logo Image -->
+    <img src="assets/images/logo.png" alt="VastuSuraksha Logo" height="40" class="me-2">
+    <!-- Tagline -->
+    <span class="text-white">VastuSuraksha</span>
+    <small class="text-muted ms-2">-<b><i> Safeguarding Infrastructure, Intelligently</i></b></small>
+  </a>
+
+  <!-- Navbar Toggle for Mobile View -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar Links -->
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <!-- Home Link -->
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+      </li>
+      <!--Dashboard Link-->
+      <li class="nav-item">
+        <a class="nav-link" href="dashboard.html">Dashboard</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="analytics.html"><i class="fas fa-chart-line me-1"></i> Analytics</a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link" href="reports.html"><i class="fas fa-file-alt me-1"></i> Reports</a>
+  </li>
+      <!-- Login Link -->
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+      <!-- Sign Up Link -->
+      <li class="nav-item">
+        <a class="nav-link" href="/register">Sign Up</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="fas fa-chart-line me-2"></i> Overview
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#structural">
+                                <i class="fas fa-building me-2"></i> Structural
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#environmental">
+                                <i class="fas fa-water me-2"></i> Environmental
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#maintenance">
+                                <i class="fas fa-tools me-2"></i> Maintenance
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 ms-sm-auto px-md-4 py-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2"><i class="fas fa-chart-pie me-2"></i> Infrastructure Analytics</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                            <i class="fas fa-calendar me-1"></i> Last 30 days
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Key Metrics -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card analytics-card h-100">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">Structural Integrity</h6>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h2 class="card-title mb-0">87.5%</h2>
+                                    <span class="trend-indicator up-trend">
+                                        <i class="fas fa-arrow-up me-1"></i>2.3%
+                                    </span>
+                                </div>
+                                <div class="progress mt-3" style="height: 8px;">
+                                    <div class="progress-bar bg-success" style="width: 87.5%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card analytics-card h-100">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">Risk Exposure</h6>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h2 class="card-title mb-0">Medium</h2>
+                                    <span class="trend-indicator down-trend">
+                                        <i class="fas fa-arrow-down me-1"></i>1.1%
+                                    </span>
+                                </div>
+                                <div class="progress mt-3" style="height: 8px;">
+                                    <div class="progress-bar bg-warning" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card analytics-card h-100">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">Maintenance Efficiency</h6>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h2 class="card-title mb-0">78.2%</h2>
+                                    <span class="trend-indicator up-trend">
+                                        <i class="fas fa-arrow-up me-1"></i>4.7%
+                                    </span>
+                                </div>
+                                <div class="progress mt-3" style="height: 8px;">
+                                    <div class="progress-bar bg-info" style="width: 78.2%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Chart -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Structural Health Trends</h5>
+                        <canvas id="mainChart" height="250"></canvas>
+                    </div>
+                </div>
+
+                <!-- Secondary Charts -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Environmental Factors</h5>
+                                <canvas id="environmentChart" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Maintenance Activities</h5>
+                                <canvas id="maintenanceChart" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Charts
+        const mainCtx = document.getElementById('mainChart').getContext('2d');
+        const mainChart = new Chart(mainCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [
+                    {
+                        label: 'Structural Integrity',
+                        data: [85, 82, 88, 85, 87, 89, 87.5],
+                        borderColor: '#2A4E6E',
+                        backgroundColor: 'rgba(42, 78, 110, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Risk Level',
+                        data: [72, 75, 70, 68, 65, 63, 65],
+                        borderColor: '#FF6B35',
+                        backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        const envCtx = document.getElementById('environmentChart').getContext('2d');
+        const envChart = new Chart(envCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Water Level', 'Temperature', 'Humidity', 'Wind Speed'],
+                datasets: [{
+                    label: 'Current Values',
+                    data: [3.2, 28, 65, 12],
+                    backgroundColor: [
+                        'rgba(58, 123, 127, 0.7)',
+                        'rgba(255, 107, 53, 0.7)',
+                        'rgba(42, 78, 110, 0.7)',
+                        'rgba(108, 117, 125, 0.7)'
+                    ]
+                }]
+            }
+        });
+
+        const maintCtx = document.getElementById('maintenanceChart').getContext('2d');
+        const maintChart = new Chart(maintCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Completed', 'Scheduled', 'Overdue', 'Pending'],
+                datasets: [{
+                    data: [45, 25, 15, 15],
+                    backgroundColor: [
+                        '#28a745',
+                        '#17a2b8',
+                        '#dc3545',
+                        '#ffc107'
+                    ]
+                }]
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

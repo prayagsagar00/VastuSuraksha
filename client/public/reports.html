@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports | VastuSuraksha</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        :root {
+            --primary-color: #2A4E6E;
+            --secondary-color: #3A7B7F;
+            --accent-color: #FF6B35;
+        }
+        
+        .report-card {
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .report-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .report-type {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-strip">
+        🚧 Welcome to VastuSuraksha – Safeguarding Infrastructure, Intelligently. 
+        <a href="/contact">Contact Us</a>
+      </div>
+
+      <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark ">
+    <div class="container-fluid">
+      <!-- Logo & Tagline -->
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <!-- Logo Image -->
+        <img src="assets/images/logo.png" alt="VastuSuraksha Logo" height="40" class="me-2">
+        <!-- Tagline -->
+        <span class="text-white">VastuSuraksha</span>
+        <small class="text-muted ms-2">-<b><i> Safeguarding Infrastructure, Intelligently</i></b></small>
+      </a>
+  
+      <!-- Navbar Toggle for Mobile View -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <!-- Home Link -->
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <!--Dashboard Link-->
+          <li class="nav-item">
+            <a class="nav-link" href="dashboard.html">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="analytics.html"><i class="fas fa-chart-line me-1"></i> Analytics</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="reports.html"><i class="fas fa-file-alt me-1"></i> Reports</a>
+      </li>
+          <!-- Login Link -->
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <!-- Sign Up Link -->
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Sign Up</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h1 class="display-5"><i class="fas fa-file-alt me-2"></i> Infrastructure Reports</h1>
+            <button class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i> New Report
+            </button>
+        </div>
+
+        <!-- Report Filters -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <form>
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Report Type</label>
+                            <select class="form-select">
+                                <option>All Reports</option>
+                                <option>Structural Integrity</option>
+                                <option>Risk Assessment</option>
+                                <option>Maintenance</option>
+                                <option>Environmental</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Time Period</label>
+                            <select class="form-select">
+                                <option>All Time</option>
+                                <option>Last 7 Days</option>
+                                <option>Last 30 Days</option>
+                                <option>Last Quarter</option>
+                                <option>Last Year</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-select">
+                                <option>All Statuses</option>
+                                <option>Completed</option>
+                                <option>Pending</option>
+                                <option>Scheduled</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-filter me-2"></i> Filter
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Reports Grid -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <!-- Report 1 -->
+            <div class="col">
+                <div class="card h-100 report-card">
+                    <div class="card-body position-relative">
+                        <i class="fas fa-building report-type"></i>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="card-title mb-0">Structural Integrity Report</h5>
+                            <span class="badge bg-success">Completed</span>
+                        </div>
+                        <p class="card-text text-muted">Comprehensive analysis of structural health across all monitored assets.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-muted">Generated: 15 Jun 2023</small>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report 2 -->
+            <div class="col">
+                <div class="card h-100 report-card">
+                    <div class="card-body position-relative">
+                        <i class="fas fa-tools report-type"></i>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="card-title mb-0">Maintenance Plan Q3</h5>
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        </div>
+                        <p class="card-text text-muted">Recommended maintenance activities for the upcoming quarter.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-muted">Generated: 01 Jun 2023</small>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report 3 -->
+            <div class="col">
+                <div class="card h-100 report-card">
+                    <div class="card-body position-relative">
+                        <i class="fas fa-exclamation-triangle report-type"></i>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="card-title mb-0">Risk Assessment</h5>
+                            <span class="badge bg-danger">Urgent</span>
+                        </div>
+                        <p class="card-text text-muted">Identification of high-risk infrastructure components requiring attention.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-muted">Generated: 28 May 2023</small>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report 4 -->
+            <div class="col">
+                <div class="card h-100 report-card">
+                    <div class="card-body position-relative">
+                        <i class="fas fa-water report-type"></i>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="card-title mb-0">Flood Risk Analysis</h5>
+                            <span class="badge bg-success">Completed</span>
+                        </div>
+                        <p class="card-text text-muted">Assessment of flood risk for riverside infrastructure.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-muted">Generated: 20 May 2023</small>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report 5 -->
+            <div class="col">
+                <div class="card h-100 report-card">
+                    <div class="card-body position-relative">
+                        <i class="fas fa-chart-line report-type"></i>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="card-title mb-0">Monthly Performance</h5>
+                            <span class="badge bg-info">Scheduled</span>
+                        </div>
+                        <p class="card-text text-muted">Monthly infrastructure performance metrics and trends.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-muted">Generated: 01 May 2023</small>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report 6 -->
+            <div class="col">
+                <div class="card h-100 report-card">
+                    <div class="card-body position-relative">
+                        <i class="fas fa-file-alt report-type"></i>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="card-title mb-0">Annual Summary</h5>
+                            <span class="badge bg-secondary">Archived</span>
+                        </div>
+                        <p class="card-text text-muted">Comprehensive annual report on all infrastructure assets.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-muted">Generated: 15 Jan 2023</small>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <nav class="mt-5">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

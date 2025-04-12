@@ -1,0 +1,279 @@
+.top-strip {
+    background-color: #B22222;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 8px 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .top-strip a {
+    color: #FFD700;
+    margin-left: 10px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .top-strip a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+  }
+
+ /* Navbar Styles */
+.navbar {
+    background-color: #4CAF50; /* Green background for a more professional feel */
+    padding: 15px 0;
+  }
+  
+  /* Navbar Logo & Tagline */
+  .navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-brand img {
+    border-radius: 50%; /* Make logo circular */
+    max-height: 40px;
+    width: 40px; /* Set a fixed size for the circular logo */
+    margin-right: 10px; /* Space between logo and tagline */
+  }
+  
+  .navbar-brand small {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: #f1f1f1; /* Lighter color for the tagline */
+  }
+  
+  /* Navbar Link Styles */
+  .navbar-nav .nav-link {
+    color: #FFFFFF !important;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 10px 15px;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #FFEB3B !important; /* Yellow hover color */
+    background-color: rgba(255, 235, 59, 0.2); /* Slight background change on hover */
+    border-radius: 5px;
+  }
+  
+  /* Active link color */
+  .navbar-nav .nav-link.active {
+    color: #FFEB3B !important; /* Yellow for active link */
+  }
+  
+  /* Mobile Navbar */
+  .navbar-toggler {
+    border-color: #FFEB3B; /* Yellow border for toggler */
+  }
+  
+  .navbar-toggler-icon {
+    background-color: #FFEB3B; /* Yellow color for the toggler icon */
+  }
+  
+  /* Navbar Items - Responsive Layout */
+  .navbar-nav {
+    flex-direction: row;
+  }
+  
+  .navbar-nav .nav-item {
+    margin-left: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-nav {
+      text-align: center;
+    }
+  
+    .navbar-nav .nav-item {
+      margin-left: 0;
+      margin-bottom: 10px;
+    }
+  
+    .navbar-toggler {
+      margin-right: 10px;
+    }
+  }
+
+  /* Hero Section Styling */
+.hero {
+    position: relative;
+    color: white;
+    text-align: center;
+  }
+  
+  .hero .text-content {
+    z-index: 2;
+  }
+  
+  .hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  .hero p {
+    font-size: 1.25rem;
+    font-weight: 300;
+  }
+  
+  .hero a.btn-warning {
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 12px 40px;
+  }
+  
+  .hero a.btn-warning:hover {
+    background-color: #f1c40f;
+    color: #000;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Global Background Color for index.html */
+body {
+    background-color: #e8f5e9; /* Light green background */
+    color: #333; /* Dark text for good contrast */
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .hero {
+    background-color: #66bb6a; /* Soft green background for the hero section */
+    background-image: none; /* Remove any background image */
+  }
+  
+  /* Adjust Hero Text Color */
+  .hero .text-content {
+    color: #ffffff;
+  }
+  
+  .hero .btn-warning {
+    background-color: #ffeb3b; /* Yellow for Call-to-Action button */
+  }
+  
+  .hero .btn-warning:hover {
+    background-color: #fbc02d; /* Darker yellow on hover */
+  }
+
+  /* Testinomials */
+  
+  .features .card i,
+.how-it-works i {
+  transition: transform 0.3s ease;
+}
+.features .card:hover i,
+.how-it-works i:hover {
+  transform: scale(1.2);
+}
+
+.carousel-item blockquote {
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.cta-final {
+  background-image: linear-gradient(to right, #f12711, #f5af19);
+}
+
+.card,
+.carousel-item {
+  border-radius: 16px;
+}
+
+.card img {
+  object-fit: cover;
+  border: 3px solid #f5af19;
+}
+
+/* footer */
+
+.custom-footer {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)),
+                        url('https://example.com/blueprint-bg.jpg') center/cover;
+            color: #ecf0f1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-title {
+            color: #e67e22 !important;
+            border-left: 3px solid #e67e22;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-link {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-link:hover {
+            color: #e67e22;
+            padding-left: 5px;
+        }
+
+        .social-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+        }
+
+        .credits {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* data-input page */
+
+        body.bg-body {
+            background: linear-gradient(135deg, #f0faff, #e6f7ff);
+            font-family: 'Segoe UI', sans-serif;
+          }
+          
+          h2 {
+            text-shadow: 1px 1px 2px #cce5ff;
+          }
+          
+          .card {
+            background-color: #fdfdfd;
+            border-radius: 16px;
+            border: none;
+          }
+          
+          .btn-primary {
+            background-color: #007bff;
+            border: none;
+          }
+          
+          .btn-primary:hover {
+            background-color: #0056b3;
+          }
+          
+          
