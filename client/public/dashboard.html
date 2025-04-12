@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - VastuSuraksha</title>
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -42,9 +43,26 @@
 <body>
     <div class="top-strip">
         🚧 Welcome to VastuSuraksha – Safeguarding Infrastructure, Intelligently. 
-        <a href="/contact">Contact Us</a>
+        <a href="/contact.html">Contact Us</a>
       </div>
           <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark ">
+    <div class="container-fluid">
+      <!-- Logo & Tagline -->
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <!-- Logo Image -->
+        <img src="assets/images/logo.png" alt="VastuSuraksha Logo" height="40" class="me-2">
+        <!-- Tagline -->
+        <span class="text-white">VastuSuraksha</span>
+        <small class="text-muted ms-2">-<b><i> Safeguarding Infrastructure, Intelligently</i></b></small>
+      </a>
+  
+      <!-- Navbar Toggle for Mobile View -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark ">
     <div class="container-fluid">
       <!-- Logo & Tagline -->
@@ -68,14 +86,16 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
-          <!-- Features Link -->
-          <li class="nav-item">
-            <a class="nav-link" href="#features">Features</a>
-          </li>
           <!--Dashboard Link-->
           <li class="nav-item">
             <a class="nav-link" href="dashboard.html">Dashboard</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="analytics.html"><i class="fas fa-chart-line me-1"></i> Analytics</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="reports.html"><i class="fas fa-file-alt me-1"></i> Reports</a>
+      </li>
           <!-- Login Link -->
           <li class="nav-item">
             <a class="nav-link" href="/login">Login</a>
@@ -84,22 +104,10 @@
           <li class="nav-item">
             <a class="nav-link" href="/register">Sign Up</a>
           </li>
-          <!-- Contact Link -->
-          <li class="nav-item">
-            <a class="nav-link" href="/contact">Contact</a>
-          </li>
         </ul>
       </div>
     </div>
   </nav>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background: var(--primary-color);">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-shield-alt me-2"></i>VastuSuraksha
-            </a>
-        </div>
-    </nav>
-
     <div class="container py-5">
         <!-- Real-time Metrics -->
         <div class="row g-4 mb-4">
@@ -192,6 +200,91 @@
             </div>
         </div>
     </div>
+
+     <!--Footer Section-->
+  <footer class="custom-footer pt-5">
+    <div class="container">
+        <div class="row g-4 footer-content">
+            <!-- About Section -->
+            <div class="col-md-6 col-lg-4">
+                <h4 class="footer-title">About VastuSuraksha</h4>
+                <b><p class="text-secondary">Integrating Vastu principles with modern civil engineering for optimal architectural harmony.</p> </b>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-6 col-lg-2">
+                <h4 class="footer-title">Quick Links</h4>
+                <div class="d-flex flex-column">
+                    <a href="index.html" class="footer-link mb-2">Home</a>
+                    <a href="dashboard.html" class="footer-link mb-2">Dashboard</a>
+                    <a href="analytics.html" class="footer-link mb-2">Analytics</a>
+                    <a href="reports.html" class="footer-link mb-2">Reports</a>
+                    <a href="login.html" class="footer-link mb-2">Login</a>
+                    <a href="register.html" class="footer-link">Sign Up</a>
+                </div>
+            </div>
+
+            <!-- Contact & Social -->
+            <div class="col-md-6 col-lg-4">
+                <h4 class="footer-title">Contact Us</h4>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-envelope me-2"></i>
+                        <a href="mailto:support@vastusuraksha.com" class="footer-link">support@vastusuraksha.com</a>
+                    </li>
+                    <li class="mb-3">
+                        <i class="fas fa-phone me-2"></i>
+                        <a href="tel:+919876543210" class="footer-link">+91 9256762259</a>
+                    </li>
+                </ul>
+                <div class="d-flex gap-3">
+                    <a href="https://www.facebook.com/profile.php?id=61574733552675" class="social-icon text-white"><i class="fab fa-facebook"></i></a>
+                    <a href="https://x.com/" class="social-icon text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/prayagsagar00/" class="social-icon text-white"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/prayagsagar18" class="social-icon text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <!-- Credits Section -->
+            <div class="col-12 mt-5 credits">
+                <div class="text-center py-3">
+                    <p class="mb-1">Designed and coded with ❤️ by Prayag</p>
+                    <p class="mb-1">© 2025 VastuSuraksha. All rights reserved.</p>
+                    <p class="mb-1">Image Credits: BHU Infrastructure, Bhakra Nangal Dam, Bootstrap, Unsplash</p>
+                    <p>Built with: Bootstrap 5, HTML5, CSS3, JavaScript, Node.js, Express, MongoDB</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script> 
+     // Smooth scroll functionality
+     document.querySelectorAll('.footer-link[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Social media hover effect
+    document.querySelectorAll('.social-icon').forEach(icon => {
+        icon.addEventListener('mouseenter', () => {
+            icon.style.transform = 'translateY(-5px)';
+        });
+        icon.addEventListener('mouseleave', () => {
+            icon.style.transform = 'translateY(0)';
+        });
+    });
+</script>
+  
+  
 
     <script>
         // Initialize Charts
